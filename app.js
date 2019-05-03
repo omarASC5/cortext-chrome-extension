@@ -1,7 +1,7 @@
 const express      = require("express"),
 		app        = express(),
 		ejs        = require("ejs"),
-		// keys       = require("./config/keys.js"),
+		keys       = require("./config/keys.js"),
 		request    = require("request"),
 		compromise = require("compromise"),
 		bodyParser = require("body-parser"),
@@ -104,6 +104,6 @@ app.post("/index", (req, res, next) => {
 
 
 // Server Setup/Initialization
-app.listen(process.env.PORT || 3000, () => {
-	console.log(`Server running on port ${3000}!`);
+app.listen(process.env.PORT || keys.PORT, () => {
+	console.log(`Server running on port ${keys.PORT}!`);
 });
