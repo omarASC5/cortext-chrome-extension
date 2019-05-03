@@ -12,7 +12,7 @@
 	  "default_popup": "popup.html"
 	},
 	"permissions": [
-		"http://localhost:3000/index",
+		"https://pure-brushlands-63188.herokuapp.com/index",
 		"activeTab"
 	]
    }
