@@ -11,5 +11,8 @@
 	  "default_icon": "logo_original.png",
 	  "default_popup": "popup.html"
 	},
-	"permissions": ["activeTab"]
+	"permissions": [
+		"http://localhost:3000/index",
+		"activeTab"
+	]
    }
