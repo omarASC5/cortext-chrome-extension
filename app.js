@@ -37,7 +37,22 @@ const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS,
   }
   
 });
-const Link = require('./models/Links');
+
+const Link = db.define('link', {
+	id: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		autoIncrement: true,
+		primaryKey: 'true'
+	},
+	url: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+}, {
+	timestamps: false
+});
+
 // Test DB
 db.authenticate()
 .then(() => console.log('Database Connected...'))
