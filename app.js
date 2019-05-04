@@ -22,7 +22,11 @@ app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // Database
 const db = require('./config/database');
 const Link = require('./models/Links');
-// Test DB
+
+const Sequelize = require('sequelize');
+
+
+		// Test DB
 db.authenticate()
 .then(() => console.log('Database Connected...'))
 .catch(err => console.log(`Error: ${err}`));
