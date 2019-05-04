@@ -28,15 +28,14 @@ const client = new Client({
 client.connect();
 
 
-client.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'", (err, res) => {
-	if (err) throw err;
-	for (let row of res.rows) {
-	  console.log(JSON.stringify(row));
-	}
-	client.end();
-  }).then((tableRows) => {
-	  console.log(tableRows);
-  })
+client
+	.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'", (err, res) => {
+		if (err) throw err;
+		for (let row of res.rows) {
+			console.log(JSON.stringify(row));
+		}
+		client.end();
+		});
 // Database
 const db = require('./config/database');
 const Link = require('./models/Links');
