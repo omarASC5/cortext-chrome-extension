@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // const db = require('./config/database');
 const Sequelize = require('sequelize');
 if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
+	sequelize = null;
     // the application is executed on Heroku ... use the postgres         database
 sequelize =new Sequelize(process.env.HEROKU_POSTGRESQL_BRONZE_URL,
  {
