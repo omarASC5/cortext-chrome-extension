@@ -22,22 +22,45 @@ app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // Database
 // const db = require('./config/database');
 const Sequelize = require('sequelize');
-
-// Option 1: Passing parameters separately
-const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
-	logging: false,
-	host: 'pure-brushlands-63188.herokuapp.com',
-	dialect: 'postgres',
-
-	
-  pool: {
-	  max: 5,
-	  min: 0,
-	  acquire: 30000,
-	  idle: 10000
-  }
-  
+if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
+    // the application is executed on Heroku ... use the postgres         database
+sequelize =new Sequelize(process.env.HEROKU_POSTGRESQL_BRONZE_URL,
+ {
+   dialect: "postgres",
+   protocol: "postgres",
+   port: 5432,
+   host: "https://pure-brushlands-63188.herokuapp.com",
+   logging: true //false
 });
+} else {
+// the application is executed on the local machine ... use mysql
+ const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
+		logging: false,
+		host: 'pure-brushlands-63188.herokuapp.com',
+		dialect: 'postgres',
+ })
+}
+// global.models = {
+//   Sequelize: Sequelize,
+//   sequelize: sequelize,
+//   User: sequelize.import(__dirname + "/user"),
+// // add your other models here
+//   };
+// Option 1: Passing parameters separately
+// const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
+// 	logging: false,
+// 	host: 'pure-brushlands-63188.herokuapp.com',
+// 	dialect: 'postgres',
+
+
+//   pool: {
+// 	  max: 5,
+// 	  min: 0,
+// 	  acquire: 30000,
+// 	  idle: 10000
+//   }
+  
+
 
 const Link = db.define('link', {
 	id: {
