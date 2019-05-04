@@ -39,6 +39,25 @@ sequelize =new Sequelize(process.env.HEROKU_POSTGRESQL_BRONZE_URL,
 		host: 'pure-brushlands-63188.herokuapp.com',
 		dialect: 'postgres',
  })
+ global.models = {
+	Sequelize: Sequelize,
+	sequelize: sequelize,
+	Link: db.define('link', {
+		id: {
+			type: Sequelize.INTEGER,
+			allowNull: false,
+			autoIncrement: true,
+			primaryKey: 'true'
+		},
+		url: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+	}, {
+		timestamps: false
+	})
+	};
+  
 }
 // global.models = {
 //   Sequelize: Sequelize,
@@ -62,20 +81,20 @@ sequelize =new Sequelize(process.env.HEROKU_POSTGRESQL_BRONZE_URL,
   
 
 
-const Link = db.define('link', {
-	id: {
-		type: Sequelize.INTEGER,
-		allowNull: false,
-		autoIncrement: true,
-		primaryKey: 'true'
-	},
-	url: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-}, {
-	timestamps: false
-});
+// const Link = db.define('link', {
+// 	id: {
+// 		type: Sequelize.INTEGER,
+// 		allowNull: false,
+// 		autoIncrement: true,
+// 		primaryKey: 'true'
+// 	},
+// 	url: {
+// 		type: Sequelize.STRING,
+// 		allowNull: false
+// 	},
+// }, {
+// 	timestamps: false
+// });
 
 // Test DB
 db.authenticate()
