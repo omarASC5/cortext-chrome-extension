@@ -68,12 +68,11 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
 		console.log(JSON.stringify(row));
 	}
 	console.log(res)
-	const Link = require('./models/Links');
 
-	client.end();
+	// client.end();
 });
 
-// const Link = require('./models/Links');
+const Link = require('./models/Links');
 
 
 
