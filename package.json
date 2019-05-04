@@ -32,6 +32,7 @@
     "request": "^2.88.0",
     "sentiment": "^5.0.1",
     "sequelize": "^5.8.2",
+    "sequelize-heroku": "^2.1.0",
     "string-to-dom": "^0.1.5"
   }
 }
