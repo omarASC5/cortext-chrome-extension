@@ -42,7 +42,7 @@ sequelize =new Sequelize(process.env.HEROKU_POSTGRESQL_BRONZE_URL,
  })
  global.models = {
 	Sequelize: Sequelize,
-	sequelize: sequelize,
+	sequelize: null,
 	Link: db.define('link', {
 		id: {
 			type: Sequelize.INTEGER,
