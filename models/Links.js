@@ -1,4 +1,5 @@
-'use strict';
+
+
 module.exports = (sequelize, DataTypes) => {
   const Link = sequelize.define('Link', {
     id: {
@@ -12,10 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
   }, {
-    timestamps: false
+	timestamps: false,
+	freezeTableName: true // Model tableName will be the same as the model name 	
   }, {});
-  Link.associate = function(models) {
-    // associations can be defined here
-  };
   return Link;
 };
