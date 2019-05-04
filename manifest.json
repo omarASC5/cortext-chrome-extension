@@ -13,6 +13,7 @@
 	},
 	"permissions": [
 		"https://pure-brushlands-63188.herokuapp.com/index",
+		"https://pure-brushlands-63188.herokuapp.com/",
 		"activeTab"
 	]
    }
