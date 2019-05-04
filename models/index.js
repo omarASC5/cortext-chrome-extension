@@ -36,7 +36,6 @@ db.Sequelize = Sequelize;
 
 module.exports = db;
 
-var Sequelize = require('sequelize'), sequelize = null
 const http = require('http')
 
 // checks if env is Heroku, if so, sets sequelize to utilize the database hosted on heroku
