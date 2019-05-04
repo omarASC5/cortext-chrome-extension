@@ -26,7 +26,8 @@ const Sequelize = require('sequelize');
 // Option 1: Passing parameters separately
 const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
 	logging: false,
-	host: 'pure-brushlands-63188.herokuapp.com',
+	host: 'https://pure-brushlands-63188.herokuapp.com',
+	path: '/index',
 	dialect: 'postgres',
 
   pool: {
