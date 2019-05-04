@@ -107,7 +107,7 @@ db.authenticate()
 .then(() => console.log('Database Connected...'))
 .catch(err => console.log(`Error: ${err}`));
 
-Link: db.define('link', {
+const Link = db.define('link', {
 	id: {
 		type: Sequelize.INTEGER,
 		allowNull: false,
