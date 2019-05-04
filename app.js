@@ -19,48 +19,44 @@ app.set("views", "views"); // Tells EJS the path to the "views" directory
 app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // const sentiment = new Sentiment(); // Set's up thing for sentiment
 // .sequelizerc
-const path = require('path');
 
-module.exports = {
-  'config': path.resolve('config', 'config.js')
-}
 // Database
 // const db = require('./config/database');
 // const Link = require('./models/Links');
-var sequelize = require('sequelize-heroku').connect(require('sequelize'));
+// var sequelize = require('sequelize-heroku').connect(require('sequelize'));
 
-if (sequelize) {
-    sequelize.authenticate().then( function() {
-        var config = sequelize.connectionManager.config;
-        console.log('sequelize-heroku: Connected to '+config.host+' as '+config.username+'.');
+// if (sequelize) {
+//     sequelize.authenticate().then( function() {
+//         var config = sequelize.connectionManager.config;
+//         console.log('sequelize-heroku: Connected to '+config.host+' as '+config.username+'.');
         
-        sequelize.query('SELECT 1+1 as test').then( function(res) {
-            console.log('1+1='+res[0][0].test);
-        });
+//         sequelize.query('SELECT 1+1 as test').then( function(res) {
+//             console.log('1+1='+res[0][0].test);
+//         });
         
-    }).catch( function(err) {
-        var config = sequelize.connectionManager.config;
-        console.log('Sequelize: Error connecting '+config.host+' as '+config.user+': '+err);
-    });
-} else {
-    console.log('No environnement variable found.');
-}
+//     }).catch( function(err) {
+//         var config = sequelize.connectionManager.config;
+//         console.log('Sequelize: Error connecting '+config.host+' as '+config.user+': '+err);
+//     });
+// } else {
+//     console.log('No environnement variable found.');
+// }
 
 // const Sequelize = require('sequelize');
-// const { Client } = require('pg');
+const { Client } = require('pg');
 
-// const client = new Client({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: true,
-// });
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
 
-// client.connect((err) => {
-// 	if (err) {
-// 	  console.error('connection error', err.stack)
-// 	} else {
-// 	  console.log('connected')
-// 	}
-//   })
+client.connect((err) => {
+	if (err) {
+	  console.error('connection error', err.stack)
+	} else {
+	  console.log('connected')
+	}
+  })
 
 // client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
 // 	if (err) throw(err)
