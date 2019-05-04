@@ -9,7 +9,7 @@ const express      = require("express"),
 		sentiment  = new Sentiment(),
 		html       = require('html-parse-stringify'),
 		stringToDom = require('string-to-dom');
-		
+
 		const jsdom = require("jsdom");
 		const { JSDOM } = jsdom;
 
@@ -24,7 +24,9 @@ const path = require('path');
 module.exports = {
   'config': path.resolve('config', 'config.js')
 }
-
+// Database
+// const db = require('./config/database');
+// const Link = require('./models/Links');
 var sequelize = require('sequelize-heroku').connect(require('sequelize'));
 
 if (sequelize) {
@@ -43,34 +45,31 @@ if (sequelize) {
 } else {
     console.log('No environnement variable found.');
 }
-// Database
-// const db = require('./config/database');
 
-const Sequelize = require('sequelize');
-const { Client } = require('pg');
+// const Sequelize = require('sequelize');
+// const { Client } = require('pg');
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
+// const client = new Client({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: true,
+// });
 
-client.connect((err) => {
-	if (err) {
-	  console.error('connection error', err.stack)
-	} else {
-	  console.log('connected')
-	}
-  })
+// client.connect((err) => {
+// 	if (err) {
+// 	  console.error('connection error', err.stack)
+// 	} else {
+// 	  console.log('connected')
+// 	}
+//   })
 
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-	if (err) throw(err)
-	for (let row of res.rows) {
-		console.log(JSON.stringify(row));
-	}
-	console.log(res)
-
-	// client.end();
-});
+// client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+// 	if (err) throw(err)
+// 	for (let row of res.rows) {
+// 		console.log(JSON.stringify(row));
+// 	}
+// 	console.log(res)
+// 	client.end();
+// });
 
 const Link = require('./models/Links');
 
@@ -158,7 +157,6 @@ app.post("/index", (req, res, next) => {
 
 
 // Server Setup/Initialization
-app.listen(process.env.PORT || keys.PORT, () => {
-	console.log(`Server running on port ${keys.PORT}!`);
-});
-
+// app.listen(process.env.PORT || keys.PORT, () => {
+// 	console.log(`Server running on port ${keys.PORT}!`);
+// });
