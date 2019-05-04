@@ -45,7 +45,6 @@ if (sequelize) {
 }
 // Database
 // const db = require('./config/database');
-const Link = require('./models/Links');
 
 const Sequelize = require('sequelize');
 const { Client } = require('pg');
@@ -69,6 +68,8 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
 		console.log(JSON.stringify(row));
 	}
 	console.log(res)
+	const Link = require('./models/Links');
+
 	client.end();
 });
 
