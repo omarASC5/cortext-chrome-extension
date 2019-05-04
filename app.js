@@ -29,6 +29,7 @@ const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS,
 	host: 'pure-brushlands-63188.herokuapp.com',
 	dialect: 'postgres',
 
+	
   pool: {
 	  max: 5,
 	  min: 0,
