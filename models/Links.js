@@ -1,16 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-	const Sequelize = require('sequelize');
-
   const Link = sequelize.define('Link', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: 'true'
     },
     url: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
   }, {
