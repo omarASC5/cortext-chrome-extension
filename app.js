@@ -10,6 +10,7 @@ const express      = require("express"),
 		html       = require('html-parse-stringify'),
 		stringToDom = require('string-to-dom');
 
+		const models = require("./models/index");
 		const jsdom = require("jsdom");
 		const { JSDOM } = jsdom;
 
