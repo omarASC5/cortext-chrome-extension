@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize');
 
+
 // Option 1: Passing parameters separately
 module.exports = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
 	logging: false,
-	host: 'https://pure-brushlands-63188.herokuapp.com',
+	host: 'pure-brushlands-63188.herokuapp.com',
 	dialect: 'postgres',
 
   pool: {
@@ -13,6 +14,5 @@ module.exports = new Sequelize('link_to_articles', process.env.USER, process.env
 	  idle: 10000
   }
 
-	
   
 });

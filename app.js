@@ -1,7 +1,7 @@
 const express      = require("express"),
 		app        = express(),
 		ejs        = require("ejs"),
-		// keys       = require("./config/keys.js"),
+		keys       = require("./config/keys.js"),
 		request    = require("request"),
 		compromise = require("compromise"),
 		bodyParser = require("body-parser"),
@@ -18,76 +18,26 @@ app.use(express.static(__dirname + '/public')); // Tells express, CSS is in publ
 app.set("views", "views"); // Tells EJS the path to the "views" directory
 app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // const sentiment = new Sentiment(); // Set's up thing for sentiment
+const { Client } = require('pg');
 
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
 
-// Option 1: Passing parameters separately
-// const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
-// 	logging: false,
-// 	host: 'pure-brushlands-63188.herokuapp.com',
-// 	dialect: 'postgres',
+client.connect();
 
-
-//   pool: {
-// 	  max: 5,
-// 	  min: 0,
-// 	  acquire: 30000,
-// 	  idle: 10000
-//   }
-  
-// });
-
-require('dotenv').config()
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + './config/config.json')[env];
-const db = {};
-
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
-
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+client.query('SELECT link_to_articles,links FROM information_schema.tables;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
   }
+  client.end();
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-
-
-const Link = db.define('link', {
-	id: {
-		type: Sequelize.INTEGER,
-		allowNull: false,
-		autoIncrement: true,
-		primaryKey: 'true'
-	},
-	url: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-}, {
-	timestamps: false
-});
-
+// Database
+const db = require('./config/database');
+const Link = require('./models/Links');
 // Test DB
 db.authenticate()
 .then(() => console.log('Database Connected...'))
@@ -170,6 +120,6 @@ app.post("/index", (req, res, next) => {
 
 
 // Server Setup/Initialization
-app.listen(process.env.PORT || 3000, () => {
-	console.log(`Server running on port ${process.env.PORT}!`);
+app.listen(process.env.PORT || keys.PORT, () => {
+	console.log(`Server running on port ${keys.PORT}!`);
 });
