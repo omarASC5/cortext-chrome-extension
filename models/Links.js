@@ -1,5 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
+	const Sequelize = require('sequelize');
+
   const Link = sequelize.define('Link', {
     id: {
       type: Sequelize.INTEGER,

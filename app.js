@@ -85,7 +85,7 @@ app.get("/", (req, res, next) => {
 
 // Renders the index page
 app.get("/index", (req, res, next) => {
-	Link.findAll()
+	models.Link.findAll()
 		.then((links) => {
 			let url = links.pop().url;
 			return url;
@@ -108,7 +108,7 @@ app.post("/index", (req, res, next) => {
 		url: url
 	}
 
-	Link.create({
+	models.Link.create({
 		url: data.url
 	})
 	// .then((link) => {
@@ -116,7 +116,7 @@ app.post("/index", (req, res, next) => {
 	// })
 	// .catch((err) => console.log(`Error: ${err}`));
 
-	Link.findAll()
+	models.Link.findAll()
 		.then((links) => {
 			let url = links.pop().url;
 			return url;
