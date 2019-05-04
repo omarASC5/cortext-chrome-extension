@@ -157,6 +157,6 @@ app.post("/index", (req, res, next) => {
 
 
 // Server Setup/Initialization
-// app.listen(process.env.PORT || keys.PORT, () => {
-// 	console.log(`Server running on port ${keys.PORT}!`);
-// });
+app.listen(process.env.PORT || keys.PORT, () => {
+	console.log(`Server running on port ${keys.PORT}!`);
+});
