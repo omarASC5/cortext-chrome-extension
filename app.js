@@ -22,32 +22,6 @@ app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // Database
 // const db = require('./config/database');
 // const Link = require('./models/Links');
-
-const Sequelize = require('sequelize');
-const { Client } = require('pg');
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
-
-client.connect((err) => {
-	if (err) {
-	  console.error('connection error', err.stack)
-	} else {
-	  console.log('connected')
-	}
-  })
-
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-	if (err) throw(err)
-	for (let row of res.rows) {
-		console.log(JSON.stringify(row));
-	}
-	console.log(res)
-	client.end();
-});
-
 var sequelize = require('sequelize-heroku').connect(require('sequelize'));
 
 if (sequelize) {
@@ -66,6 +40,33 @@ if (sequelize) {
 } else {
     console.log('No environnement variable found.');
 }
+
+// const Sequelize = require('sequelize');
+// const { Client } = require('pg');
+
+// const client = new Client({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: true,
+// });
+
+// client.connect((err) => {
+// 	if (err) {
+// 	  console.error('connection error', err.stack)
+// 	} else {
+// 	  console.log('connected')
+// 	}
+//   })
+
+// client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+// 	if (err) throw(err)
+// 	for (let row of res.rows) {
+// 		console.log(JSON.stringify(row));
+// 	}
+// 	console.log(res)
+// 	client.end();
+// });
+
+
 
 
 		// Test DB
