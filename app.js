@@ -18,24 +18,7 @@ app.use(express.static(__dirname + '/public')); // Tells express, CSS is in publ
 app.set("views", "views"); // Tells EJS the path to the "views" directory
 app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // const sentiment = new Sentiment(); // Set's up thing for sentiment
-const { Client } = require('pg');
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
-
-client.connect();
-
-
-client
-	.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'", (err, res) => {
-		if (err) throw err;
-		for (let row of res.rows) {
-			console.log(JSON.stringify(row));
-		}
-		client.end();
-		});
 // Database
 const db = require('./config/database');
 const Link = require('./models/Links');
