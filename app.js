@@ -11,6 +11,7 @@ const express      = require("express"),
 		stringToDom = require('string-to-dom');
 
 		const models = require("./models/index");
+		const Sequelize = require('sequelize');
 		const jsdom = require("jsdom");
 		const { JSDOM } = jsdom;
 
