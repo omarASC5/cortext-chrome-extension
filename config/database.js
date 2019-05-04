@@ -16,6 +16,7 @@ client
 		for (let row of res.rows) {
 			console.log(JSON.stringify(row));
 		}
+		module.exports = res;
 		client.end();
-		}).then((result) => module.exports(result));
+		});
 
