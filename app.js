@@ -97,6 +97,11 @@ sequelize =new Sequelize(process.env.HEROKU_POSTGRESQL_BRONZE_URL,
 // 	timestamps: false
 // });
 
+const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
+	logging: false,
+	host: 'pure-brushlands-63188.herokuapp.com',
+	dialect: 'postgres',
+})
 // Test DB
 db.authenticate()
 .then(() => console.log('Database Connected...'))
