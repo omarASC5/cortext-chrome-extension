@@ -20,16 +20,39 @@ app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // const sentiment = new Sentiment(); // Set's up thing for sentiment
 
 // Database
-const db = require('./config/database');
-const Link = require('./models/Links');
+// const db = require('./config/database');
+// const Link = require('./models/Links');
 
 const Sequelize = require('sequelize');
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
+client.connect((err) => {
+	if (err) {
+	  console.error('connection error', err.stack)
+	} else {
+	  console.log('connected')
+	}
+  })
+
+client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+	if (err) throw(err)
+	for (let row of res.rows) {
+		console.log(JSON.stringify(row));
+	}
+	console.log(res)
+	client.end();
+});
 
 
 		// Test DB
-db.authenticate()
-.then(() => console.log('Database Connected...'))
-.catch(err => console.log(`Error: ${err}`));
+// db.authenticate()
+// .then(() => console.log('Database Connected...'))
+// .catch(err => console.log(`Error: ${err}`));
 
 // Index Route, redirects to display homepage
 app.get("/", (req, res, next) => {
