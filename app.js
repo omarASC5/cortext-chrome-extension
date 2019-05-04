@@ -28,7 +28,7 @@ const client = new Client({
 client.connect();
 
 
-client.query('SELECT link_to_articles,links FROM information_schema.tables;', (err, res) => {
+client.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'", (err, res) => {
 	if (err) throw err;
 	for (let row of res.rows) {
 	  console.log(JSON.stringify(row));
