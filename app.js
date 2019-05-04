@@ -20,14 +20,12 @@ app.set("views", "views"); // Tells EJS the path to the "views" directory
 app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 
 const db = knex({
-    client: 'pg',
-    connection: {
-      host : process.env.DATABASE_URL,
-      user : 'ocobas19',
-      password : '',
-      database : 'link_to_articles'
-    }
-});
+	    client: 'pg',
+	    connection: {
+	      host : process.env.DATABASE_URL,
+	      ssl: true
+	    }
+	});
 
 // Index Route, redirects to display homepage
 app.get("/", (req, res, next) => {
