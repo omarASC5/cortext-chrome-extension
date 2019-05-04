@@ -19,93 +19,13 @@ app.set("views", "views"); // Tells EJS the path to the "views" directory
 app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // const sentiment = new Sentiment(); // Set's up thing for sentiment
 
-// Database
-// const db = require('./config/database');
-const Sequelize = require('sequelize');
-if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
-	sequelize = null;
-    // the application is executed on Heroku ... use the postgres         database
-sequelize =new Sequelize(process.env.HEROKU_POSTGRESQL_BRONZE_URL,
- {
-   dialect: "postgres",
-   protocol: "postgres",
-   port: 5432,
-   host: "https://pure-brushlands-63188.herokuapp.com",
-   logging: true //false
-});
-} else {
-// the application is executed on the local machine ... use mysql
- const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
-		logging: false,
-		host: 'pure-brushlands-63188.herokuapp.com',
-		dialect: 'postgres',
- })
- global.models = {
-	Sequelize: Sequelize,
-	sequelize: null,
-	Link: db.define('link', {
-		id: {
-			type: Sequelize.INTEGER,
-			allowNull: false,
-			autoIncrement: true,
-			primaryKey: 'true'
-		},
-		url: {
-			type: Sequelize.STRING,
-			allowNull: false
-		},
-	}, {
-		timestamps: false
-	})
-	};
-  
-}
-// global.models = {
-//   Sequelize: Sequelize,
-//   sequelize: sequelize,
-//   User: sequelize.import(__dirname + "/user"),
-// // add your other models here
-//   };
+
 // Option 1: Passing parameters separately
-// const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
-// 	logging: false,
-// 	host: 'pure-brushlands-63188.herokuapp.com',
-// 	dialect: 'postgres',
-
-
-//   pool: {
-// 	  max: 5,
-// 	  min: 0,
-// 	  acquire: 30000,
-// 	  idle: 10000
-//   }
-  
-
-
-// const Link = db.define('link', {
-// 	id: {
-// 		type: Sequelize.INTEGER,
-// 		allowNull: false,
-// 		autoIncrement: true,
-// 		primaryKey: 'true'
-// 	},
-// 	url: {
-// 		type: Sequelize.STRING,
-// 		allowNull: false
-// 	},
-// }, {
-// 	timestamps: false
-// });
-
 const db = new Sequelize('link_to_articles', process.env.USER, process.env.PASS, {
-	logging: false,
-	host: 'pure-brushlands-63188.herokuapp.com',
 	dialect: 'postgres',
-})
-// Test DB
-db.authenticate()
-.then(() => console.log('Database Connected...'))
-.catch(err => console.log(`Error: ${err}`));
+});
+
+
 
 const Link = db.define('link', {
 	id: {
@@ -120,7 +40,12 @@ const Link = db.define('link', {
 	},
 }, {
 	timestamps: false
-})
+});
+
+// Test DB
+db.authenticate()
+.then(() => console.log('Database Connected...'))
+.catch(err => console.log(`Error: ${err}`));
 
 // Index Route, redirects to display homepage
 app.get("/", (req, res, next) => {
@@ -129,20 +54,6 @@ app.get("/", (req, res, next) => {
 
 // Renders the index page
 app.get("/index", (req, res, next) => {
-	const Link = db.define('link', {
-		id: {
-			type: Sequelize.INTEGER,
-			allowNull: false,
-			autoIncrement: true,
-			primaryKey: 'true'
-		},
-		url: {
-			type: Sequelize.STRING,
-			allowNull: false
-		},
-	}, {
-		timestamps: false
-	})
 	Link.findAll()
 		.then((links) => {
 			let url = links.pop().url;
@@ -155,20 +66,6 @@ app.get("/index", (req, res, next) => {
 
 // Post route, the forms sends a URL to be exported as an object with article feautures 
 app.post("/index", (req, res, next) => {
-	const Link = db.define('link', {
-		id: {
-			type: Sequelize.INTEGER,
-			allowNull: false,
-			autoIncrement: true,
-			primaryKey: 'true'
-		},
-		url: {
-			type: Sequelize.STRING,
-			allowNull: false
-		},
-	}, {
-		timestamps: false
-	})
 	// Initializes article-parser, which helps parse articles into object forme
 	const {
 		extract 
@@ -228,5 +125,5 @@ app.post("/index", (req, res, next) => {
 
 // Server Setup/Initialization
 app.listen(process.env.PORT || 3000, () => {
-	console.log(`Server running on port ${3000}!`);
+	console.log(`Server running on port ${process.env.PORT}!`);
 });
