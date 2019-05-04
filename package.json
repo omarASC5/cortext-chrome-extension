@@ -31,7 +31,8 @@
     "pg-hstore": "^2.3.2",
     "request": "^2.88.0",
     "sentiment": "^5.0.1",
-    "sequelize": "^5.8.2",
+    "sequelize": "^5.8.4",
+    "sequelize-cli": "^5.4.0",
     "sequelize-heroku": "^2.1.0",
     "string-to-dom": "^0.1.5"
   }

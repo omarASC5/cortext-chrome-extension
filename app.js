@@ -9,7 +9,7 @@ const express      = require("express"),
 		sentiment  = new Sentiment(),
 		html       = require('html-parse-stringify'),
 		stringToDom = require('string-to-dom');
-
+		
 		const jsdom = require("jsdom");
 		const { JSDOM } = jsdom;
 
@@ -18,10 +18,13 @@ app.use(express.static(__dirname + '/public')); // Tells express, CSS is in publ
 app.set("views", "views"); // Tells EJS the path to the "views" directory
 app.use(bodyParser.urlencoded({extended: true})); // bodyParser config
 // const sentiment = new Sentiment(); // Set's up thing for sentiment
+// .sequelizerc
+const path = require('path');
 
-// Database
-// const db = require('./config/database');
-// const Link = require('./models/Links');
+module.exports = {
+  'config': path.resolve('config', 'config.js')
+}
+
 var sequelize = require('sequelize-heroku').connect(require('sequelize'));
 
 if (sequelize) {
@@ -40,32 +43,36 @@ if (sequelize) {
 } else {
     console.log('No environnement variable found.');
 }
+// Database
+// const db = require('./config/database');
+const Link = require('./models/Links');
 
-// const Sequelize = require('sequelize');
-// const { Client } = require('pg');
+const Sequelize = require('sequelize');
+const { Client } = require('pg');
 
-// const client = new Client({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: true,
-// });
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
 
-// client.connect((err) => {
-// 	if (err) {
-// 	  console.error('connection error', err.stack)
-// 	} else {
-// 	  console.log('connected')
-// 	}
-//   })
+client.connect((err) => {
+	if (err) {
+	  console.error('connection error', err.stack)
+	} else {
+	  console.log('connected')
+	}
+  })
 
-// client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-// 	if (err) throw(err)
-// 	for (let row of res.rows) {
-// 		console.log(JSON.stringify(row));
-// 	}
-// 	console.log(res)
-// 	client.end();
-// });
+client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+	if (err) throw(err)
+	for (let row of res.rows) {
+		console.log(JSON.stringify(row));
+	}
+	console.log(res)
+	client.end();
+});
 
+// const Link = require('./models/Links');
 
 
 
