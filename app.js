@@ -129,6 +129,20 @@ app.get("/", (req, res, next) => {
 
 // Renders the index page
 app.get("/index", (req, res, next) => {
+	const Link = db.define('link', {
+		id: {
+			type: Sequelize.INTEGER,
+			allowNull: false,
+			autoIncrement: true,
+			primaryKey: 'true'
+		},
+		url: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+	}, {
+		timestamps: false
+	})
 	Link.findAll()
 		.then((links) => {
 			let url = links.pop().url;
@@ -141,6 +155,20 @@ app.get("/index", (req, res, next) => {
 
 // Post route, the forms sends a URL to be exported as an object with article feautures 
 app.post("/index", (req, res, next) => {
+	const Link = db.define('link', {
+		id: {
+			type: Sequelize.INTEGER,
+			allowNull: false,
+			autoIncrement: true,
+			primaryKey: 'true'
+		},
+		url: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+	}, {
+		timestamps: false
+	})
 	// Initializes article-parser, which helps parse articles into object forme
 	const {
 		extract 
