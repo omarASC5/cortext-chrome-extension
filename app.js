@@ -34,7 +34,9 @@ client.query("SELECT table_name FROM information_schema.tables WHERE table_schem
 	  console.log(JSON.stringify(row));
 	}
 	client.end();
-  });
+  }).then((tableRows) => {
+	  console.log(tableRows);
+  })
 // Database
 const db = require('./config/database');
 const Link = require('./models/Links');
