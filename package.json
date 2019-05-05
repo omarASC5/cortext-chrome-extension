@@ -1,5 +1,5 @@
 {
-  "name": "news-bias-sentiment-analysis",
+  "name": "cortext-chrome-extension",
   "version": "1.0.0",
   "description": "A website that helps detect the bias of news article.",
   "main": "app.js",
