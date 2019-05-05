@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/omarASC5/news-bias-sentiment-analysis.git"
+    "url": "git+https://github.com/omarASC5/cortext-chrome-extension.git"
   },
   "author": "Omar Cobas",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/omarASC5/news-bias-sentiment-analysis/issues"
+    "url": "https://github.com/omarASC5/cortext-chrome-extension/issues"
   },
-  "homepage": "https://github.com/omarASC5/news-bias-sentiment-analysis#readme",
+  "homepage": "https://github.com/omarASC5/cortext-chrome-extension#readme",
   "dependencies": {
     "article-parser": "^2.4.0",
     "body-parser": "^1.18.3",
